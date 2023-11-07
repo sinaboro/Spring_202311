@@ -3,7 +3,11 @@ C:\JavaWorks\works\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\
 \BoardWeb\src\main\java
 C:\JavaWorks\works\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3178133098.index
 \ex00\src\main\java
+C:\JavaWorks\works\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2415907875.index
+\ex01\src\main\java
 C:\JavaWorks\works\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3505836752.index
 \MybatisTest\src\main\java
 C:\JavaWorks\works\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\391915402.index
 \boardWeb\src\main\java
+C:\JavaWorks\works\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3012140731.index
+\ex01\src\main\java

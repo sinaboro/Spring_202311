@@ -4,9 +4,13 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.mybatis.prj.mapperInterface">
   
-  <select id="selectOne" parameterType="int"  
-  	resultType="com.ezen.mybatis.prj.MemberVO">
+  <select id="selectOne" resultType="com.ezen.mybatis.prj.MemberVO">
     select * from mybatis where id = #{id}
+  </select>
+
+  <select id="selectAll" 
+  	resultType="com.ezen.mybatis.prj.MemberVO">
+    select * from mybatis order by id
   </select>
   
   <insert id="insertMember">
@@ -18,6 +22,16 @@
   <delete id="deleteMember">
  	 delete from mybatis where id = #{id}
   </delete>
+  
+  <update id="updateMember">
+	  update mybatis set
+	    name = #{name},
+	    phone = #{phone},
+	    address = #{address}
+	  where id = #{id}
+  </update>
+  
+  
   
   
 </mapper>
