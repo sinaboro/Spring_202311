@@ -1,0 +1,5 @@
+package com.ezen.mybatis.prj;
+
+public interface mapperInterface {
+	public MemberVO selectOne(int id);
+}
