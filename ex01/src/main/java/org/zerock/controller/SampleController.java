@@ -4,11 +4,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.SampleDTO;
 import org.zerock.domain.SampleDTOList;
 
@@ -20,6 +22,27 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class SampleController {
 
+	
+	@DeleteMapping("/ex07/{id}")
+	public String ex07(@PathVariable("id") int id) {
+		//삭제 작업..
+		return "ex07";
+	}
+	
+	@GetMapping("/ex06/{name}/{age}")
+	public String ex06(@PathVariable("name") String name, @PathVariable("age") int age) {
+		log.info("name>> " + name);
+		log.info("age>> " + age);
+		
+		return "ex06";
+	}
+	
+	@GetMapping("/ex05")
+	public void ex05(String name, int age) {
+		log.info(name);
+		log.info(age);
+	}
+	
 	@GetMapping("/ex04")
 	public String ex04(SampleDTO dto, Integer page , Model model) {
 		log.info(dto);
