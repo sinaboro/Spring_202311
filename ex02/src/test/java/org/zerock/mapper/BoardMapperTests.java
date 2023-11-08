@@ -1,44 +1,32 @@
-package com.zerock.persistence;
+package org.zerock.mapper;
 
-import java.sql.Connection;
-
-import javax.sql.DataSource;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.zerock.domain.BoardVO;
 
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Log4j
-public class DataSourceTests {
+public class BoardMapperTests {
 
+//	@Setter(onMethod_ = @Autowired)
 	@Autowired
-	private DataSource dataSource;
+	private BoardMapper mapper;
 	
 	@Test
-	public void testConnection() {
-		
-		try {
-			Connection con = dataSource.getConnection();
-			log.info("con2 : " + con);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			
-		}
+	public void testGetList() {
+		 List<BoardVO> list = mapper.getList();
+		 
+		 for(BoardVO vo  : list)
+			 log.info(vo);
+		 
 	}
 }
-
-
-
-
-
-
-
-
-
