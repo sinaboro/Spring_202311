@@ -1,14 +1,19 @@
 package org.zerock.controller;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.SampleDTO;
@@ -22,6 +27,36 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class SampleController {
 
+	@GetMapping("/ex10")
+	public ResponseEntity<String> ex10(){
+		log.info("ex10");
+		String msg = "{\"name\" : \"홍길동\"}";
+		
+		HttpHeaders headers  = new HttpHeaders();
+		headers.add("Content-Type", "application/json;charset=utf-8");
+		return new ResponseEntity<String>(msg, headers, HttpStatus.ACCEPTED);
+	}
+	
+	
+	@GetMapping("/ex09")
+	public void ex09(@RequestBody SampleDTO dto) {
+		log.info("ex09.........");
+		log.info(dto.getName());
+		log.info(dto.getAge());
+		
+	}
+
+	@GetMapping("/ex08")
+	public @ResponseBody SampleDTO ex08() {
+//	public SampleDTO ex08() {
+		log.info("ex08.........");
+		SampleDTO dto = new SampleDTO();
+		dto.setName("유비");
+		dto.setAge(20);
+		
+		return dto;
+	}
+	
 	
 	@DeleteMapping("/ex07/{id}")
 	public String ex07(@PathVariable("id") int id) {
@@ -44,7 +79,7 @@ public class SampleController {
 	}
 	
 	@GetMapping("/ex04")
-	public String ex04(SampleDTO dto, Integer page , Model model) {
+	public String ex04(SampleDTO dto, int page , Model model) {
 		log.info(dto);
 		log.info(page);
 		model.addAttribute("page", page);
@@ -58,10 +93,10 @@ public class SampleController {
 	}
 	
 	@GetMapping("/ex02")
-	public String ex02(@RequestParam("name") String name2,
+	public String ex02(@RequestParam("name") String name,
 			@RequestParam("age") int age2 ) {
 //		public String ex02(String name,	int age ) {
-		log.info("name >> " + name2);
+		log.info("name >> " + name);
 		log.info("age >> " + (age2+10));
 		return "ex02";
 	}
