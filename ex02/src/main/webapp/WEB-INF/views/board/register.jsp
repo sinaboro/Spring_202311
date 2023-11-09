@@ -20,7 +20,7 @@
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-            	<form role="from" action="/board/register" method="post">
+            	<form role="from" method="post">
             		<div class="form-group">
             			<label>Title</label>
             			<input class="form-control" name="title">

@@ -47,6 +47,31 @@
                         </tr>
                      </c:forEach>   
                 </table>
+                
+          <!-- 모달창 추가 -->
+		  <div class="modal" id="myModal">
+		    <div class="modal-dialog">
+		      <div class="modal-content">
+		      
+		        <!-- Modal Header -->
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title" id="myModalLabel">Modal Title</h4>
+		        </div>
+		        <!-- Modal body -->
+		        <div class="modal-body">
+		          처리가 완료되었습니다.
+		        </div>
+		        <!-- Modal footer -->
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>     
+           <!-- /모달창 추가 -->     
+                
+                
             </div>
             <!-- /.panel-body -->
         </div>
@@ -55,5 +80,40 @@
     <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
+  
+<script>
+	$(document).ready(function(){
+		var result = '<c:out value="${result}" />';
+		
+		checkModal(result);
+		
+		
+		//모달창
+		function checkModal(result){
+			if(result === ""){
+				return;
+			}
+			if(parseInt(result)>0){
+				$(".modal-body").html("게시글 " + parseInt(result)+"번이 등록되었습니다.");
+			}
+			$("#myModal").modal("show");
+		}
+		
+		//register 호출
+		$("#regBtn").on("click",function(){
+			self.location = "/board/register";
+		});
+		
+		
+	});
+</script>  
+  
+  
+  
+  
+  
+  
+  
+  
             
 <%@ include file="../includes/footer.jsp" %> 
