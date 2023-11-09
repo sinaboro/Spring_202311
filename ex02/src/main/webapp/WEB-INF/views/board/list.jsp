@@ -38,7 +38,9 @@
                     <c:forEach var="board" items="${list}">
                         <tr class="odd gradeX">
                             <td>${board.bno}</td>
-                            <td>${board.title}</td>
+                            
+                            <td><a href="/board/get?bno=${board.bno}">${board.title}</td>
+                            
                             <td>${board.writer}</td>
                             <td><fmt:formatDate value="${board.regdate}" 
                             pattern="yyyy-MM-dd"  /></td>
