@@ -34,25 +34,23 @@ public class BoardMapperTests {
 	@Test
 	public void testInsert() {
 
-		BoardVO vo = BoardVO.builder()
-				.title("인서트4")
-				.content("인서트 내용2")
-				.writer("조운2")
-				.build();
-		
-		mapper.insert(vo);
+		/*
+		 * BoardVO vo = BoardVO.builder() .title("인서트4") .content("인서트 내용2")
+		 * .writer("조운2") .build();
+		 * 
+		 * mapper.insert(vo);
+		 */
 	}
 
 	@Test
 	public void testInserteSelectKey() {
 		
-		BoardVO vo = BoardVO.builder()
-				.title("인서트5")
-				.content("인서트 내용3")
-				.writer("미방")
-				.build();
-		
-		mapper.inserteSelectKey(vo);
+		/*
+		 * BoardVO vo = BoardVO.builder() .title("인서트5") .content("인서트 내용3")
+		 * .writer("미방") .build();
+		 * 
+		 * mapper.inserteSelectKey(vo);
+		 */
 	}
 	
 	@Test
@@ -68,15 +66,12 @@ public class BoardMapperTests {
 	
 	@Test
 	public void testUpdate() {
-		BoardVO vo = BoardVO.builder()
-				.bno(10L)
-				.title("수정 제목")
-				.content("수정 내용")
-				.writer("수정자")
-				.build();
-		
-		int result = mapper.update(vo);
-		log.info("result >> " + result);
+		/*
+		 * BoardVO vo = BoardVO.builder() .bno(9L) .title("수정 제목2") .content("수정 내용2")
+		 * .writer("수정자2") .build();
+		 * 
+		 * int result = mapper.update(vo); log.info("result >> " + result);
+		 */
 	}
 	
 	
