@@ -42,18 +42,29 @@ public class BoardController {
 	
 	
 	@GetMapping("/get")
-	public void get(Long bno) {
+	public void get(Long bno, Model model) {
 		log.info("get");
+
+		model.addAttribute("board", service.get(bno));
 	}
 	
 	@PostMapping("/remove")
-	public void remove(Long bno) {
+	public String remove(Long bno, RedirectAttributes rttr) {
 		log.info("remove");
+		if(service.remove(bno)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		return "redirect:/board/list";
 	}
 	
 	@PostMapping("/modify")
-	public void modify(BoardVO board) {
+	public String modify(BoardVO board, RedirectAttributes rttr) {
 		log.info("modify");
+		
+		if(service.modify(board)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		return "redirect:/board/list";
 	}
 }
 

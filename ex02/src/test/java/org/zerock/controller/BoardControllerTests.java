@@ -31,12 +31,15 @@ public class BoardControllerTests {
 	public void setup() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
 	}
-
+	
 	@Test
 	public void testList() throws Exception {
 
 		log.info(
-				mockMvc.perform(MockMvcRequestBuilders.get("/board/list")).andReturn().getModelAndView().getModelMap());
+				mockMvc.perform(MockMvcRequestBuilders.get("/board/list"))
+				.andReturn()
+				.getModelAndView()
+				.getModelMap());
 	}
 
 	@Test
@@ -51,4 +54,42 @@ public class BoardControllerTests {
 				.getViewName();
 		log.info(resultPage);
 	}
+
+	@Test
+	public void testGet() throws Exception {
+		 				
+		log.info(
+			mockMvc.perform(MockMvcRequestBuilders.get("/board/get")
+			.param("bno",	"25"))
+			.andReturn()
+			.getModelAndView()
+			.getModelMap()
+		);
+	}
+	
+	@Test
+	public void testModify() throws Exception {
+		String resultPage = 
+				mockMvc.perform(MockMvcRequestBuilders.post("/board/modify")
+						.param("bno", "24")
+				.param("title",	"재수정내용"	)
+				.param("content", "재수정 내용")
+				.param("writer", "재수정자"))
+				.andReturn()
+				.getModelAndView()
+				.getViewName();
+		log.info(resultPage);
+	}
+	
+	@Test
+	public void testRemove() throws Exception {
+		String resultPage = 
+				mockMvc.perform(MockMvcRequestBuilders.post("/board/remove")
+						.param("bno", "24"))
+				.andReturn()
+				.getModelAndView()
+				.getViewName();
+		log.info(resultPage);
+	}
+	
 }

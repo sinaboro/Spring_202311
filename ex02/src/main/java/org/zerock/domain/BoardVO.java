@@ -25,7 +25,7 @@ import lombok.ToString;
 @Getter 
 @ToString
 @Builder
-//@NoArgsConstructor
+@NoArgsConstructor
 @AllArgsConstructor
 public class BoardVO {
 	private Long bno;
@@ -34,4 +34,24 @@ public class BoardVO {
 	private String writer;
 	private Date regdate;
 	private Date updateDate;
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
