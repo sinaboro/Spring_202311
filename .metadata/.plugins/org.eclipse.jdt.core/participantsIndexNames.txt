@@ -3,6 +3,8 @@ C:\JavaWorks\works\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\
 \BoardWeb\src\main\java
 C:\JavaWorks\works\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1288633631.index
 \ex02_1\src\main\java
+C:\JavaWorks\works\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\755943323.index
+\ex02\src\main\java
 C:\JavaWorks\works\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2415907875.index
 \ex01\src\main\java
 C:\JavaWorks\works\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\391915402.index
