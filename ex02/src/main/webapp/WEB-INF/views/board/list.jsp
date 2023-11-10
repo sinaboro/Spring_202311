@@ -17,7 +17,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 Board List Page
-                <button id="regBtn" type="button" class="btn btn-xs pull-right">
+                <button id="regBtn" type="button" class="btn btn-xs btn-primary pull-right">
                 		Register New Board
                 </button>
                 
@@ -89,10 +89,11 @@
 		
 		checkModal(result);
 		
+		history.replaceState({}, null, null);
 		
 		//모달창
 		function checkModal(result){
-			if(result === ""){
+			if(result === "" || history.state){
 				return;
 			}
 			if(parseInt(result)>0){

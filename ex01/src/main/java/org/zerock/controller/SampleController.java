@@ -34,6 +34,7 @@ public class SampleController {
 		
 		HttpHeaders headers  = new HttpHeaders();
 		headers.add("Content-Type", "application/json;charset=utf-8");
+		
 		return new ResponseEntity<String>(msg, headers, HttpStatus.ACCEPTED);
 	}
 	

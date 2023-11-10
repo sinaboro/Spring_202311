@@ -30,6 +30,7 @@ public class BoardController {
 		model.addAttribute("list", service.getList());
 	}
 	
+	//localhost:8080/board/register
 	@GetMapping("/register")
 	public void register() {
 		
@@ -44,15 +45,17 @@ public class BoardController {
 	
 		return "redirect:/board/list";
 	}
-	
-	
-	@GetMapping("/get")
-	public void get(Long bno, Model model) {
-		log.info("get");
 
+	//localhost:8080/board/get?bno= 값
+	//localhost:8080/board/modify?bno= 값
+	@GetMapping({"/get", "/modify"})
+	public void get(Long bno, Model model) {
+		log.info("/get or modify");
+		
 		model.addAttribute("board", service.get(bno));
 	}
 	
+	//localhost:8080/board/remove
 	@PostMapping("/remove")
 	public String remove(Long bno, RedirectAttributes rttr) {
 		log.info("remove");
