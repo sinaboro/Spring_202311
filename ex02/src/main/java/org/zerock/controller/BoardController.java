@@ -3,6 +3,7 @@ package org.zerock.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -55,7 +56,7 @@ public class BoardController {
 	//localhost:8080/board/get?bno= 값
 	//localhost:8080/board/modify?bno= 값
 	@GetMapping({"/get", "/modify"})
-	public void get(Long bno, Model model) {
+	public void get(Long bno, @ModelAttribute("cri")Criterial cri,  Model model) {
 		log.info("/get or modify");
 		
 		model.addAttribute("board", service.get(bno));
@@ -63,21 +64,29 @@ public class BoardController {
 	
 	//localhost:8080/board/remove
 	@PostMapping("/remove")
-	public String remove(Long bno, RedirectAttributes rttr) {
+	public String remove(Long bno, @ModelAttribute("cri")Criterial cri, RedirectAttributes rttr) {
 		log.info("remove");
 		if(service.remove(bno)) {
 			rttr.addFlashAttribute("result", "success");
 		}
+		
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		
 		return "redirect:/board/list";
 	}
 	
 	@PostMapping("/modify")
-	public String modify(BoardVO board, RedirectAttributes rttr) {
+	public String modify(BoardVO board, @ModelAttribute("cri")Criterial cri,  RedirectAttributes rttr) {
 		log.info("modify");
 		
 		if(service.modify(board)) {
 			rttr.addFlashAttribute("result", "success");
 		}
+		
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		
 		return "redirect:/board/list";
 	}
 }

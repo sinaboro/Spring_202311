@@ -39,7 +39,9 @@
                         <tr class="odd gradeX">
                             <td>${board.bno}</td>
                             
-                            <td><a href="/board/get?bno=${board.bno}">${board.title}</td>
+                            <td>
+                            	<a class="move" href="${board.bno}">${board.title} </a>
+                            </td>
                             
                             <td>${board.writer}</td>
                             <td><fmt:formatDate value="${board.regdate}" 
@@ -140,6 +142,15 @@
 			e.preventDefault();
 			
 			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+ 			actionForm.submit(); 
+		});
+		
+		
+		//조회하고 리스트 화면으로 이동할 때 기본 pagenum 유지
+		$(".move").on("click", function(e){
+			e.preventDefault();
+			actionForm.append("<input type='hidden' name='bno' value='" + $(this).attr("href")+ "'>");
+			actionForm.attr("action", "/board/get");
 			actionForm.submit();
 		});
 		
