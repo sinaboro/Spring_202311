@@ -87,6 +87,11 @@ public class BoardMapperTests {
 	}
 	
 	
+	@Test
+	public void testCount() {
+		log.info(mapper.getTotalCount(new Criterial(1,10)));
+	}
+	
 	
 	
 	

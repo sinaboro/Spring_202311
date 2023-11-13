@@ -31,10 +31,8 @@ public class BoardController {
 	public void list(Criterial cri, Model model) {
 		log.info("list >> " + cri);
 		
-//		cri.setPageNum(12);
-//		cri.setAmount(10);
 		model.addAttribute("list", service.getList(cri));
-		model.addAttribute("pageMaker", new PageDTO(cri, 125));
+		model.addAttribute("pageMaker", new PageDTO(cri, service.getTotal(cri)));
 	}
 	
 	//localhost:8080/board/register

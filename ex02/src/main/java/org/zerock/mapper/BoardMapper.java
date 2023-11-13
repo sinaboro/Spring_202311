@@ -28,5 +28,8 @@ public interface BoardMapper {
 	
 	public int update(BoardVO vo);
 	
+	//전체 갯수 구하기
+	public int getTotalCount(Criterial cri);
+	
 	
 }
