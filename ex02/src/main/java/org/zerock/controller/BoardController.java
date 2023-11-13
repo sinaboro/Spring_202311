@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criterial;
+import org.zerock.domain.PageDTO;
 import org.zerock.service.BoardService;
 
 import lombok.AllArgsConstructor;
@@ -28,7 +29,11 @@ public class BoardController {
 	@GetMapping("/list")
 	public void list(Criterial cri, Model model) {
 		log.info("list >> " + cri);
+		
+//		cri.setPageNum(12);
+//		cri.setAmount(10);
 		model.addAttribute("list", service.getList(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri, 125));
 	}
 	
 	//localhost:8080/board/register
