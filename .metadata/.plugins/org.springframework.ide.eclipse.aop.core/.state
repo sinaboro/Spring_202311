@@ -2,7 +2,8 @@
 <aop-reference-model>
 <aop-project name="boardWeb"/>
 <aop-project name="boardWeb2"/>
-<aop-project name="ex01"/>
 <aop-project name="ex00"/>
+<aop-project name="ex01"/>
 <aop-project name="ex02"/>
+<aop-project name="ex02_mysql"/>
 </aop-reference-model>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.zerock.domain.BoardVO;
+import org.zerock.domain.Criterial;
 import org.zerock.mapper.BoardMapper;
 import org.zerock.persistence.DataSourceTests;
 
@@ -31,7 +32,8 @@ public class BoardServiceImpleTests {
 	
 	@Test
 	public void testGetList() {
-		boardService.getList()
+		Criterial cri = new Criterial();
+		boardService.getList(cri)
 			.forEach(board->log.info(board));
 	}
 
