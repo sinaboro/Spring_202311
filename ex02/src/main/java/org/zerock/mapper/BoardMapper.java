@@ -1,6 +1,7 @@
 package org.zerock.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Select;
 import org.zerock.domain.BoardVO;
@@ -30,6 +31,10 @@ public interface BoardMapper {
 	
 	//전체 갯수 구하기
 	public int getTotalCount(Criterial cri);
+	
+	
+	//테스트용
+	public List<BoardVO> searchTest(Map<String, Map<String, String>> map);
 	
 	
 }

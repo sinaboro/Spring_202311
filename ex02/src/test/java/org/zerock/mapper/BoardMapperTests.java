@@ -1,6 +1,8 @@
 package org.zerock.mapper;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -89,13 +91,42 @@ public class BoardMapperTests {
 	
 	@Test
 	public void testCount() {
-		log.info(mapper.getTotalCount(new Criterial(1,10)));
+		
+		Criterial cri = new Criterial();
+		cri.setType("TCW");
+		cri.setKeyword("자바");
+		log.info(mapper.getTotalCount(cri));
+	}
+	
+	@Test
+	public void testSearch() {
+		Map<String, String> map = new HashMap<String, String>();
+		
+		map.put("T", "조조");
+		map.put("C", "자바");
+		map.put("W", "허균");
+		
+		Map<String , Map<String,String>> outer = 
+				new HashMap<String, Map<String,String>>();
+		
+		outer.put("map", map);
+		
+		List<BoardVO> list = mapper.searchTest(outer);
+		log.info(list);
 	}
 	
 	
-	
-	
-	
+	@Test
+	public void testSearchPaging() {
+		Criterial cri = new Criterial();
+		cri.setType("");
+		cri.setKeyword("");
+		
+//		List<BoardVO> list = mapper.getListWithPaging(cri);
+//		log.info(list);
+		
+		mapper.getListWithPaging(cri).forEach(list-> log.info(list));
+	}
 	
 	
 	
