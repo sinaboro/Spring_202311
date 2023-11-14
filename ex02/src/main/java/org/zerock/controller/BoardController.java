@@ -27,6 +27,8 @@ public class BoardController {
 //	private BoardService service; 
 	private final BoardService service; 
 	
+	
+	//http://localhost:8080/board/list?type=C&keyword=%EC%A3%BC%EB%A7%90&pageNum=3&amount=10
 	@GetMapping("/list")
 	public void list(Criterial cri, Model model) {
 		log.info("list >> " + cri);

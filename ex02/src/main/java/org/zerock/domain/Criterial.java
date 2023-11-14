@@ -17,6 +17,7 @@ public class Criterial {
 	
 	public Criterial() {
 		this(1,10); 
+		
 	}
 
 	public Criterial(int pageNum, int amount) {
@@ -27,7 +28,7 @@ public class Criterial {
 	public String[] getTypeArr() {
 		return type==null? new String[] {} : type.split("");
 	}
-	
+
 }
 
 
