@@ -41,12 +41,72 @@ var replyService = (function() {
 			}
 
 		});
-	}
+	} // end getList
 
+	function remove(rno, callback, error){
+		$.ajax({
+			type: "delete",
+			url: "/replies/" + rno,
+			success : function(result, status, xhr){
+				if(callback){
+					callback(result);
+				}
+			},
+			error : function(xhr, status, er){
+				if(error){
+					error(er);
+				}
+			}
+		});
+	} // end remove
+
+	function update(reply, callback, error){
+		console.log("RNO: " + reply.rno);
+
+		$.ajax({
+			type: "put",
+			url: "/replies/" +reply.rno,
+			data: JSON.stringify(reply),
+			contentType: "apllication/json; charset=utf-8",
+
+			success: function(result, status, xhr){
+				if(callback){
+					callback(result);
+				}
+			},
+			error: function(xhr, status, er){
+				if(error){
+					error(er);
+				}
+			}
+		});
+	} //end update
+
+	function get(rno, callback, error){
+		console.log("get >>> " + rno);
+		
+		$.ajax({
+			type: "get",
+			url: "/replies/"+rno,
+			success: function(result, status, xhr){
+				if(callback){
+					callback(result);
+				}
+			},
+			error: function(xhr, status, er){
+				if(error){
+					error(er);
+				}
+			}
+		});
+	} //end get
 
 	return {
 		add : add,
-		getList : getList
+		getList : getList,
+		remove: remove,
+		update: update,
+		get: get
 	};
 
 })();

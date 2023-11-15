@@ -69,11 +69,41 @@
 	
 	console.log("bnoValue : " + bnoValue);
 	
-	replyService.getList({bno:bnoValue, page:1} , function(list){
+	replyService.get(
+		48,
+		function(data){
+			console.log(data);
+		},
+		function(err){
+			console.log(err);
+		}
+	);
+	/* replyService.update(
+			{rno:38, reply:"Modify Reply...."},
+			function(data){
+				alert("수정완료 >>" + data);
+			},
+			function(er){
+				alert("실패 >> " + er);
+			}
+	); */
+	/* replyService.remove(
+		34, 
+		function(data){
+			console.log(data);
+			if(data === "success"){
+				alert("REMOVED");
+			}
+		},
+		function(err){
+			alert("ERROR....");
+		}
+	); */
+	/* replyService.getList({bno:bnoValue, page:1} , function(list){
 		for(var i=0, len = list.length || 0; i<len ; i++){
 			console.log(list[i]);
 		}
-	});
+	}); */
 	
 	/* var addValue = {
 			reply:"JS Test", 
