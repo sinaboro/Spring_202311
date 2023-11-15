@@ -57,23 +57,54 @@
     <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
+ 
+<script type="text/javascript" src="/resources/js/reply.js"></script>
+ 
+<script>
+	
+	console.log("===========================");
+	console.log("JS TEST");
+	
+	var bnoValue = '${board.bno}';  //1015842
+	
+	console.log("bnoValue : " + bnoValue);
+	
+	replyService.getList({bno:bnoValue, page:1} , function(list){
+		for(var i=0, len = list.length || 0; i<len ; i++){
+			console.log(list[i]);
+		}
+	});
+	
+	/* var addValue = {
+			reply:"JS Test", 
+			replyer: "tester", 
+			bno:bnoValue	
+	};
+	
+	
+	replyService.add(addValue , function(result){
+		alert("RESULT : " + result);
+	});
+	 */
+</script>
+ 
     
- <script>
- 	$(document).ready(function(){
- 		var operForm = $("#operForm");
- 		
- 		$("button[data-oper='modify']").on("click", function(e){
- 			operForm.attr("action", "/board/modify").submit();
- 		});
+<script>
+	$(document).ready(function(){
+		var operForm = $("#operForm");
+		
+		$("button[data-oper='modify']").on("click", function(e){
+			operForm.attr("action", "/board/modify").submit();
+		});
 
- 		$("button[data-oper='list']").on("click", function(e){
- 			operForm.find("#bno").remove();
- 			operForm.attr("action", "/board/list").submit();
- 		});
- 		
- 		
- 	});
- </script>   
+		$("button[data-oper='list']").on("click", function(e){
+			operForm.find("#bno").remove();
+			operForm.attr("action", "/board/list").submit();
+		});
+		
+		
+	});
+</script>   
     
     
     
