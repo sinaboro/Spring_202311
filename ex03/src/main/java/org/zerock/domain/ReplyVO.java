@@ -2,8 +2,10 @@ package org.zerock.domain;
 
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /*
  * create table tbl_reply(
@@ -18,6 +20,8 @@ import lombok.Data;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ReplyVO {
 	
 	private Long rno, bno;
