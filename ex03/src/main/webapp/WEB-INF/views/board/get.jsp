@@ -133,6 +133,12 @@
 <!-- 모달창 추가 -->		       
 <script type="text/javascript" src="/resources/js/reply.js"></script>
  
+<style>
+	.chat > li :hover {
+		cursor:pointer;
+	}
+</style> 
+
 <script>
 	
 	var bnoValue = '${board.bno}';  //1015842
@@ -201,6 +207,26 @@
 			modal.modal("hide");
 			
 			showList(1); //댓글 내용 새로 고침
+		});
+	});
+	
+	//댓글 조회 클릭 이벤트 처리
+	$(".chat").on("click", "li", function(e){
+		var rno = $(this).data("rno");
+		//console.log("rno >> " +rno);
+		
+		replyService.get(rno, function(reply){
+			
+			modalInpoutReply.val(reply.reply);
+			modalInpoutReplyer.val(reply.replyer);
+			modalInpoutReplyDate.val(reply.replyDate);
+			
+			modal.find("button[id != 'modalCloseBtn']").hide();
+			modalModBtn.show();
+			modalRemoveBtn.show();
+			
+			$(".modal").modal("show");
+			
 		});
 	});
 	
