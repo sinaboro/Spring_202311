@@ -11,6 +11,7 @@
     </div>
     <!-- /.col-lg-12 -->
 </div>
+
 <!-- /.row -->
 <div class="row">
     <div class="col-lg-12">
@@ -57,19 +58,81 @@
     <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
+
+
+ <!-- -------- 댓 글 ------------ -->
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+               <i class="fa fa-comments fa-fw"></i>Reply
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+           		
+           		<ul class="chat">
+           			<li class="left clearfix" data-rno='12'>
+           				<div>
+           					<div class="header">
+           						<strong class="primary-font">user00</strong>
+           						<small class="pull-right text-muted">2023-11-16 11:20</small>
+           					</div>
+           					<p>Good Job!!</p>
+           				</div>
+           			</li>
+           		</ul>
+           		
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row --> 
+ <!-- ------------------------- -->
+ 
+ 
  
 <script type="text/javascript" src="/resources/js/reply.js"></script>
  
 <script>
 	
-	console.log("===========================");
-	console.log("JS TEST");
-	
 	var bnoValue = '${board.bno}';  //1015842
+	var replyUL = $(".chat");
 	
 	console.log("bnoValue : " + bnoValue);
 	
-	replyService.get(
+	showList(1);
+	
+	function showList(page){
+		
+		replyService.getList({bno:bnoValue, page: page||1}, function(list){
+			var str="";
+			
+			if(list == null || list.length==0){
+				replyUL.html("");
+				return;
+			}
+			
+			for(var i=0, len=list.length || 0; i<len; i++){
+				
+				str += "<li class='left clearfix' data-rno='"+list[i].rno +"'>";
+				str += "<div><div class='header'>";
+				str += "<strong class='primary-font'>"+ list[i].replyer +"</strong>";
+				str += "<small class='pull-right text-muted'>"+ list[i].replyDate +"</small>";
+				str += "</div><p>"+ list[i].reply +"</p>";
+				str += "</div></li>";
+			}
+			replyUL.html(str);
+		}); //end function
+		
+	} //end showList
+	
+	
+	
+	/* replyService.get(
 		48,
 		function(data){
 			console.log(data);
@@ -77,7 +140,7 @@
 		function(err){
 			console.log(err);
 		}
-	);
+	); */
 	/* replyService.update(
 			{rno:38, reply:"Modify Reply...."},
 			function(data){
