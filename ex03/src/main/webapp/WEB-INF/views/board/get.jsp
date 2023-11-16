@@ -67,6 +67,9 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                <i class="fa fa-comments fa-fw"></i>Reply
+               <button id="addReplyBtn" class="btn btn-primary btn-xs pull-right">
+               	New Reply
+               </button>
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -91,10 +94,43 @@
     <!-- /.col-lg-12 -->
 </div>
 <!-- /.row --> 
- <!-- ------------------------- -->
+<!-- ----- /댓 글------------ -->
  
- 
- 
+<!-- 모달창 추가 -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">REPLY MODAL</h4>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="form-group">
+        	<label>Reply</label>
+        	<input class="form-control" name="reply" value="New Reply!!!">
+        </div>
+        <div class="form-group">
+        	<label>Replyer</label>
+        	<input class="form-control" name="replyer" value="Replyer">
+        </div>
+        <div class="form-group">
+        	<label>Reply Date</label>
+        	<input class="form-control" name="replyDate" value="">
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button id="modalRegisterBtn" type="button" class="btn btn-primary">Register</button>
+        <button id="modalModBtn" type="button" class="btn btn-warning">Modify</button>
+        <button id="modalRemoveBtn" type="button" class="btn btn-danger">Remove</button>
+        <button id="modalCloseBtn" type="button" class="btn btn-info">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 모달창 추가 -->		       
 <script type="text/javascript" src="/resources/js/reply.js"></script>
  
 <script>
@@ -121,7 +157,7 @@
 				str += "<li class='left clearfix' data-rno='"+list[i].rno +"'>";
 				str += "<div><div class='header'>";
 				str += "<strong class='primary-font'>"+ list[i].replyer +"</strong>";
-				str += "<small class='pull-right text-muted'>"+ list[i].replyDate +"</small>";
+				str += "<small class='pull-right text-muted'>"+ replyService.displayTime(list[i].replyDate) +"</small>";
 				str += "</div><p>"+ list[i].reply +"</p>";
 				str += "</div></li>";
 			}
@@ -130,6 +166,43 @@
 		
 	} //end showList
 	
+	var modal = $(".modal");
+	var modalInpoutReply = modal.find("input[name='reply']");
+	var modalInpoutReplyer = modal.find("input[name='replyer']");
+	var modalInpoutReplyDate = modal.find("input[name='replyDate']");
+	
+	var modalRegisterBtn = $("#modalRegisterBtn");
+	var modalModBtn = $("#modalModBtn");
+	var modalRemoveBtn = $("#modalRemoveBtn");
+	var modalCloseBtn = $("#modalCloseBtn");
+	
+	//댓글창 보이기
+	$("#addReplyBtn").on("click", function(e){
+		
+		modal.find("input").val("");
+		modalInpoutReplyDate.closest("div").hide();
+		modal.find("button[id != 'modalCloseBtn']").hide();
+		modalRegisterBtn.show();
+		
+		$(".modal").modal("show");
+	});
+	
+	//댓글 등록
+	modalRegisterBtn.on("click",function(e){
+		var reply = {
+				bno : bnoValue,
+				reply : modalInpoutReply.val(),
+				replyer : modalInpoutReplyer.val()
+		};
+		
+		replyService.add(reply, function(result){
+			alert(result);
+			modal.find("input").val();
+			modal.modal("hide");
+			
+			showList(1); //댓글 내용 새로 고침
+		});
+	});
 	
 	
 	/* replyService.get(
