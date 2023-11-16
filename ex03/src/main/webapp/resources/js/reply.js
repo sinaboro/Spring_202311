@@ -29,8 +29,9 @@ var replyService = (function() {
 			type: "get",
 			url: "/replies/pages/"+bno + "/" + page,
 			success: function(data, status, xhr){
+				
 				if(callback){
-					callback(data);
+					callback(data.replyCnt, data.list);
 				}
 			},
 			error: function(xhr, status, er){

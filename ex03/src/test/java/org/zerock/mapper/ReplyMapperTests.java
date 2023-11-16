@@ -30,23 +30,21 @@ public class ReplyMapperTests {
 	@Test
 	public void testGetListWithPaging() {
 		
-	/*	List<ReplyVO> list = 
-			mapper.getListWithPaging(new Criterial(), 1015842L);
-		
-		for(ReplyVO vo : list)
-			log.info(vo); */
-		
-		
-		
-		mapper.getListWithPaging(new Criterial(), 1015842L)
+		mapper.getListWithPaging(new Criterial(3,2), 1015842L)
 			.forEach(reply->log.info(reply));
+	}
+	
+	//1015842 public int getCountByBno(Long bno);
+	@Test
+	public void testGetCountByBno() {
+		mapper.getCountByBno(1015842L);
 	}
 	
 	@Test
 	public void testUpdate() {
 	
 		ReplyVO vo = ReplyVO.builder()
-				.reply("댓글수정2")
+				.reply("댓글수정2") 
 				.rno(1L)
 				.build();
 		mapper.update(vo);
