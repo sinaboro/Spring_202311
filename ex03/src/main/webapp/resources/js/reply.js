@@ -3,7 +3,6 @@ console.log("Reply Module..........");
 var replyService = (function() {
 	
 	function add(reply, callback, error){
-		console.log("reply.........");
 		$.ajax({
 			type: 'post',
 			url: '/replies/new',
@@ -61,13 +60,14 @@ var replyService = (function() {
 	} // end remove
 
 	function update(reply, callback, error){
-		console.log("RNO: " + reply.rno);
+		console.log("reply >> " +reply.reply);
+		console.log("rno >> " + reply.rno);
 
 		$.ajax({
 			type: "put",
 			url: "/replies/" +reply.rno,
 			data: JSON.stringify(reply),
-			contentType: "apllication/json; charset=utf-8",
+			contentType: "application/json; charset=utf-8",
 
 			success: function(result, status, xhr){
 				if(callback){

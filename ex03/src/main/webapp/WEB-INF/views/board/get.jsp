@@ -125,7 +125,7 @@
         <button id="modalRegisterBtn" type="button" class="btn btn-primary">Register</button>
         <button id="modalModBtn" type="button" class="btn btn-warning">Modify</button>
         <button id="modalRemoveBtn" type="button" class="btn btn-danger">Remove</button>
-        <button id="modalCloseBtn" type="button" class="btn btn-info">Close</button>
+        <button id="modalCloseBtn" type="button" class="btn btn-info" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -213,13 +213,14 @@
 	//댓글 조회 클릭 이벤트 처리
 	$(".chat").on("click", "li", function(e){
 		var rno = $(this).data("rno");
-		//console.log("rno >> " +rno);
 		
 		replyService.get(rno, function(reply){
 			
 			modalInpoutReply.val(reply.reply);
-			modalInpoutReplyer.val(reply.replyer);
-			modalInpoutReplyDate.val(reply.replyDate);
+			modalInpoutReplyer.val(reply.replyer).attr("readonly", "readonly");
+			modalInpoutReplyDate.val(replyService.displayTime(reply.replyDate)).attr("readonly", "readonly");
+			
+			modal.data("rno", reply.rno);
 			
 			modal.find("button[id != 'modalCloseBtn']").hide();
 			modalModBtn.show();
@@ -230,6 +231,34 @@
 		});
 	});
 	
+	//댓글 수정
+	modalModBtn.on("click", function(e){
+		
+		var reply = {
+			rno: modal.data("rno"),
+			reply: modalInpoutReply.val()
+		};
+		
+		replyService.update(reply, function(result){
+			alert(result);
+			modal.modal("hide");
+			showList(1);
+		});
+		
+	});
+
+	//댓글 삭제
+	modalRemoveBtn.on("click", function(e){
+		
+		var rno =  modal.data("rno");
+		
+		replyService.remove(rno, function(result){
+			alert(result);
+			modal.modal("hide");
+			showList(1);
+		});
+		
+	});
 	
 	/* replyService.get(
 		48,
