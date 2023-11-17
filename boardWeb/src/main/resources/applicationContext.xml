@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 
-	<!-- <bean id="tv" class="com.ezen.polymorphism.SamsungTV" init-method="initMethod"
-	destroy-method="destroyMethod"  lazy-init="true" scope="prototype">
-	</bean> -->
+	<context:component-scan base-package="com.springbook.biz"/>	
 	
-	<bean id="tv" class="com.ezen.polymorphism.SamsungTV">
-		<property name="spearker" ref="sony"></property>
-		<property name="price" value="39000"></property>
-	</bean>
-	
-	<bean id="tv2" class="com.ezen.polymorphism.LgTV"> </bean>
-	
-	
-	<bean id="sony" class="com.ezen.polymorphism.SonySpearker">
-	</bean>
-	
-	<bean id="apple" class="com.ezen.polymorphism.AppleSpearker"> </bean>
+ 	<bean id="log1" class="com.springbook.biz.common.LogAdvice"></bean>
+	<bean id="log2" class="com.springbook.biz.common.Log4jAdvice"></bean>
+	<bean id="log3" class="com.springbook.biz.common.AroundAdvice"></bean>
+
+	<aop:config>
+		<aop:pointcut id="allPointCut" 
+			expression="execution(* com.springbook.biz..*Impl.*(..))" />
+			
+			<aop:aspect ref="log3">
+				<aop:around pointcut-ref="allPointCut" method="aroundLog"/>
+			</aop:aspect>
+	</aop:config>
+
 </beans>
