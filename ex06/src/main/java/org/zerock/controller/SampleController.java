@@ -1,5 +1,6 @@
 package org.zerock.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,12 @@ public class SampleController {
 	@GetMapping("/admin")
 	public void doAdmin() {
 		System.out.println("admin access");
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MEMBER')")
+	@GetMapping("/annoMember")
+	public void doMember2() {
+		log.info("logined annotation member");
 	}
 }
 
