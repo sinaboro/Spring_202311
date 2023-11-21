@@ -6,7 +6,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="customaccessDenied" class="org.zerock.security.CustomAccessDeniedHandler" /> 
-	<bean id="cusotmLoginSuccess" class="org.zerock.security.CustomLlginSuccessHandler" />
+	<!-- <bean id="cusotmLoginSuccess" class="org.zerock.security.CustomLlginSuccessHandler" /> -->
 	<!-- <bean id="customPasswordEncoder" class="org.zerock.security.CustomNoOpPasswordEncoder" /> -->
 	<bean id="customUserDetailsService" 
 		class="org.zerock.security.CustomUserDetailsService" />
@@ -24,8 +24,8 @@
 		<security:intercept-url pattern="/sample/admin"  access="hasRole('ROLE_ADMIN')"/>
 		
 		<security:access-denied-handler ref="customaccessDenied" />
-		<security:form-login login-page="/customLogin" 
-		   authentication-success-handler-ref="cusotmLoginSuccess"/>
+		
+		<security:form-login login-page="/customLogin" />
 		
 		<security:logout logout-url="/customLogout" invalidate-session="true" 
 			delete-cookies="remember-me, JSESSIONID"/>
