@@ -72,8 +72,10 @@ public class BoardController {
 	}
 	
 	//localhost:8080/board/remove
+	@PreAuthorize("principal.username == #writer")
 	@PostMapping("/remove")
-	public String remove(Long bno, @ModelAttribute("cri")Criterial cri, RedirectAttributes rttr) {
+	public String remove(Long bno, @ModelAttribute("cri")Criterial cri, 
+			RedirectAttributes rttr, String writer) {
 		log.info("remove");
 		if(service.remove(bno)) {
 			rttr.addFlashAttribute("result", "success");
@@ -87,8 +89,10 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
+	@PreAuthorize("principal.username == #writer")
 	@PostMapping("/modify")
-	public String modify(BoardVO board, @ModelAttribute("cri")Criterial cri,  RedirectAttributes rttr) {
+	public String modify(BoardVO board, @ModelAttribute("cri")Criterial cri,  
+			RedirectAttributes rttr , String writer) {
 		log.info("modify");
 		
 		if(service.modify(board)) {

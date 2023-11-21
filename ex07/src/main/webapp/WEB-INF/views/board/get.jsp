@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%@ include file="../includes/header.jsp" %>
     
@@ -39,7 +40,15 @@
            			<input class="form-control" name="writer" value="${board.writer}"  readonly="readonly">
            		</div>
            
-           		<button data-oper="modify" class="btn btn-default">Modify</button>
+           		<sec:authentication property="principal"  var ="pinfo"/>
+       	
+       			<sec:authorize access="isAuthenticated()">
+       				<c:if test="${pinfo.username eq board.writer}">	
+       					<button data-oper="modify" class="btn btn-default">Modify</button>
+       				</c:if>	
+       			</sec:authorize>
+           		
+           		
            		<button data-oper="list" class="btn btn-info">List</button>
            		
            		<form id="operForm" action="/board/modify" method="get">
@@ -67,9 +76,12 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                <i class="fa fa-comments fa-fw"></i>Reply
-               <button id="addReplyBtn" class="btn btn-primary btn-xs pull-right">
-               	New Reply
-               </button>
+              
+               <sec:authorize access="isAuthenticated()">
+	               <button id="addReplyBtn" class="btn btn-primary btn-xs pull-right">
+	               	New Reply
+	               </button>
+               </sec:authorize>
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -197,15 +209,30 @@
 	var modalRemoveBtn = $("#modalRemoveBtn");
 	var modalCloseBtn = $("#modalCloseBtn");
 	
+	var replyer = null;
+	
+	<sec:authorize access="isAuthenticated()">
+		replyer = '<sec:authentication property="principal.username" />'
+	</sec:authorize>
+	
+	var csrfHeaderName = '${_csrf.headerName}';
+	var csrfTokenValue = "${_csrf.token}";
+		
 	//댓글창 보이기
 	$("#addReplyBtn").on("click", function(e){
 		
 		modal.find("input").val("");
+		modal.find("input[name='replyer']").val(replyer);
 		modalInpoutReplyDate.closest("div").hide();
 		modal.find("button[id != 'modalCloseBtn']").hide();
 		modalRegisterBtn.show();
 		
 		$(".modal").modal("show");
+	});
+	
+	
+	$(document).ajaxSend(function(e, xhr, options){
+		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 	});
 	
 	//댓글 등록
