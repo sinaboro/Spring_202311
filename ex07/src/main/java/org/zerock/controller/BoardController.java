@@ -50,6 +50,12 @@ public class BoardController {
 	@PreAuthorize("isAuthenticated()")
 	public String register(BoardVO vo, RedirectAttributes rttr) {
 		log.info("register : " + vo);
+		
+		
+		
+		
+		
+		
 		service.register(vo);
 		rttr.addFlashAttribute("result", vo.getBno());
 	
