@@ -43,10 +43,15 @@ var replyService = (function() {
 		});
 	} // end getList
 
-	function remove(rno, callback, error){
+	function remove(rno, replyer ,callback, error){
+		console.log("rno >>>>>>>>" + rno);
+		console.log("replyer >>>>>>>>" + replyer);
+		
 		$.ajax({
 			type: "delete",
 			url: "/replies/" + rno,
+			data: JSON.stringify({rno:rno, replyer:replyer }),
+			contentType: "application/json; charset=utf-8",
 			success : function(result, status, xhr){
 				if(callback){
 					callback(result);

@@ -61,15 +61,18 @@ public class ReplyController {
 		return new ResponseEntity<ReplyVO>(service.get(rno),HttpStatus.OK);
 	}
 	
+	@PreAuthorize("principal.username == #vo.replyer")
 	@DeleteMapping(value = "/{rno}")
-	public ResponseEntity<String> remove(@PathVariable("rno") Long rno){
+	public ResponseEntity<String> remove(@RequestBody ReplyVO vo ,@PathVariable("rno") Long rno){
 		log.info("delete >>> " + rno);
+		log.info("delete >>> " + vo.getReplyer());
 		
 		return service.remove(rno) == 1 ?
 				new ResponseEntity<String>("success", HttpStatus.OK) :
 				new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
+	@PreAuthorize("principal.username == #vo.replyer")
 	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH},
 			value = "/{rno}" , consumes = "application/json")
 	public ResponseEntity<String> modify(@RequestBody ReplyVO vo, @PathVariable("rno") Long rno){

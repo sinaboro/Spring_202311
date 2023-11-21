@@ -276,10 +276,25 @@
 	//댓글 수정
 	modalModBtn.on("click", function(e){
 		
+		var originalReplyer = modalInpoutReplyer.val();
+		
 		var reply = {
 			rno: modal.data("rno"),
-			reply: modalInpoutReply.val()
+			reply: modalInpoutReply.val(),
+			replyer:originalReplyer
 		};
+		
+		if(!replyer){
+			alert("로그인후 수정가 가능합니다.");
+			modal.modal("hide");
+			return ;
+		}
+		
+		if(replyer != originalReplyer){
+			alert("자신이 작성한 댓글만 수정 가능합니다.");
+			modal.modal("hide");
+			return ;
+		}
 		
 		replyService.update(reply, function(result){
 			alert(result);
@@ -289,12 +304,28 @@
 		
 	});
 
+	
+	
 	//댓글 삭제
 	modalRemoveBtn.on("click", function(e){
 		
 		var rno =  modal.data("rno");
 		
-		replyService.remove(rno, function(result){
+		if(!replyer){
+			alert("로그인후 삭제가 가능합니다.");
+			modal.modal("hide");
+			return ;
+		}
+		
+		var originalReplyer = modalInpoutReplyer.val();
+		
+		if(replyer != originalReplyer){
+			alert("자신이 작성한 댓글만 삭제가 가능합니다.");
+			modal.modal("hide");
+			return ;
+		}
+		
+		replyService.remove(rno, originalReplyer, function(result){
 			alert(result);
 			modal.modal("hide");
 			showList(pageNum);

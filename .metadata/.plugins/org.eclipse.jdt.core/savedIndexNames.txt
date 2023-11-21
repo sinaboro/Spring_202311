@@ -73,7 +73,6 @@ INDEX VERSION 1.131+C:\JavaWorks\works\spring\.metadata\.plugins\org.eclipse.jdt
 2106335829.index
 2110490636.index
 453471388.index
-169900274.index
 335963499.index
 3574576376.index
 1086361720.index
